@@ -1,10 +1,11 @@
 const express = require('express')
 const cors = require('cors')
-
 const app = express()
 app.use(express.json())
-
 app.use(cors())
+
+const itemRoutes = require('./backend/routes/itemRoutes')
+app.use('/api/items', itemRoutes)
 
 app.get("/api/test", (req, res)=>{
     res.json({
