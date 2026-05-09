@@ -4,7 +4,14 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+require("dotenv").config()
+const URI = process.env.MONGO_URI
+
+const mongoose = require('mongoose')
+mongoose.connect(URI)
+
 const itemRoutes = require('./backend/routes/itemRoutes')
+
 app.use('/api/items', itemRoutes)
 
 app.get("/api/test", (req, res)=>{
@@ -13,7 +20,8 @@ app.get("/api/test", (req, res)=>{
     })
 })
 
-const PORT = 5000
-app.listen(PORT, function(){
-    console.log('Server running on port: ',PORT)
+const port = process.env.PORT
+
+app.listen(port, function(){
+    console.log('Server running on port: ',port)
 })
