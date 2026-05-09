@@ -1,35 +1,30 @@
 const express = require('express')
 const router = express.Router()
 
+require("dotenv").config()
+const URI = process.env.MONGO_URI
+
+const mongoose = require('mongoose')
+mongoose.connect(URI)
+
 const Item = require("../models/Item")
 
-const item1 = new Item({
-    "email": "priyanka@gmail.com",
-    "password": "123322341"    
-})
-const item2 = new Item({
-    "email": "priyanka@gmail.com",
-    "password": "123322341"    
-})
-const item3 = new Item({
-    "email": "priyanka@gmail.com",
-    "password": "123322341"    
-})
-const item4 = new Item({
-    "email": "priyanka@gmail.com",
-    "password": "123322341"    
-})
+// const itemA = new Item({
+//     "email": "joker@gmail.com",
+//     "password": "123322341"    
+// })
+
+// itemA.save()
+
 router.get("/", async(req, res) => {
-    // const items = await Item.find()
-    // res.json([item1,item2,item3,item4])
-    
+    const items_total = await Item.find()
+    res.json(items_total)
 })
 
 router.post('/', async (req, res) => {
-//   const newItem = new Item(req.body);
-//   const savedItem = await newItem.save();
-//   res.json(savedItem);
-    
+    const new_item = new Item(req.body)
+    new_item.save()
+    res.json({msg: "new_item saved to db"})
 });
 
 module.exports = router

@@ -6,3 +6,11 @@ const ItemSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('Item', ItemSchema)
+
+
+// const itemA = new Item({
+//     "email": "joker@gmail.com",
+//     "password": "123322341"    
+// })
+
+// itemA.save()
